@@ -7,8 +7,8 @@ const page = async () => {
 
   return (
     <div className="flex flex-wrap justify-center  gap-10">
-      {projects?.map((p: TProject,idx : number) => (
-       <ProjectCard key={idx} p={p}/>
+      {projects?.map((p: TProject) => (
+       <ProjectCard key={p?._id} p={p}/>
       ))}
     </div>
   );

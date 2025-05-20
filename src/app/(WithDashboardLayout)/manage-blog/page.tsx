@@ -7,8 +7,8 @@ const { data : blogs} = await getAllBlogs()
 
   return (
      <div className="flex flex-wrap justify-center gap-10">
-      {blogs?.map((b: TBlog,idx : number) => (
-       <BlogCard key={idx} b={b}/>
+      {blogs?.map((b: TBlog) => (
+       <BlogCard key={b?._id} b={b}/>
       ))}
     </div>
   );

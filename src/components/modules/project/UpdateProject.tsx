@@ -82,7 +82,7 @@ export default function UpdateProject({ project }: { project: TProject }) {
       });
       setImagePreview(project.imageUrl);
     }
-  }, [project]);
+  }, [project,form]);
   const {
     formState: { isSubmitting },
   } = form;

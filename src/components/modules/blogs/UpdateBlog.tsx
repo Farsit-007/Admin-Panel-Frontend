@@ -44,7 +44,7 @@ const UpdateBlog = ({ blog }: { blog: TBlog }) => {
       });
    setImagePreview(blog?.imageUrl ? [blog.imageUrl] : []);
     }
-  }, [blog]);
+  }, [blog,form]);
 
   const {
     formState: { isSubmitting },

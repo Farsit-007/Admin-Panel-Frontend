@@ -11,16 +11,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { loginSchema } from "./loginschema";
 import { loginUser } from "@/services/AuthServices";
 import { useUser } from "@/context/UserContext";
 const LoginForm = () => {
-  const searchParams = useSearchParams();
   const { setIsLoading } = useUser();
-  const redirect = searchParams.get("redirectPath");
+
   const router = useRouter();
   const form = useForm({
     resolver: zodResolver(loginSchema),
@@ -34,11 +33,7 @@ const LoginForm = () => {
       const res = await loginUser(data);
       if (res.success) {
         toast.success(res?.message);
-        if (redirect) {
-          router.push(redirect);
-        } else {
-          router.push("/dashboard");
-        }
+        router.push("/dashboard");
       } else {
         toast.error(res?.message);
         setIsLoading(false);
@@ -50,9 +45,7 @@ const LoginForm = () => {
 
   return (
     <div className="max-w-md w-full border-2 rounded-xl p-5">
-      <div className="flex items-center mb-3 gap-2">
-      
-      </div>
+      <div className="flex items-center mb-3 gap-2"></div>
       <Form {...form}>
         <form className="space-y-5" onSubmit={form.handleSubmit(onSubmit)}>
           <FormField

@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useUser } from "@/context/UserContext";
@@ -18,9 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { passwordChangeSchema } from "./PasswordSchema";
 import { changePassword } from "@/services/AuthServices";
 const ChangePassword = () => {
-  const searchParams = useSearchParams();
   const { setIsLoading } = useUser();
-  const redirect = searchParams.get("redirectPath");
   const router = useRouter();
   const form = useForm({
     resolver: zodResolver(passwordChangeSchema),
@@ -32,18 +30,15 @@ const ChangePassword = () => {
   const confirmPassword = form.watch("confirmPassword");
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-        const res = await changePassword(data);
-        setIsLoading(true)
-        if (res.success) {
-          toast.success(res?.message);
-          if (redirect) {
-            router.push(redirect);
-          } else {
-            router.push("/profile");
-          }
-        } else {
-          toast.error(res?.message);
-        }
+      const res = await changePassword(data);
+      setIsLoading(true);
+      if (res.success) {
+        toast.success(res?.message);
+
+        router.push("/profile");
+      } else {
+        toast.error(res?.message);
+      }
     } catch (error: any) {
       console.log(error);
     }
@@ -105,7 +100,7 @@ const ChangePassword = () => {
                 <FormLabel>Confirm Password</FormLabel>
                 <FormControl>
                   <Input
-                     type="password"
+                    type="password"
                     placeholder="********"
                     {...field}
                     value={field.value || ""}
