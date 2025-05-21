@@ -14,10 +14,10 @@ export function NavUser() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleLogout = () => {
+  const handleLogout = async() => {
     setUser(null);
     setIsLoading(true);
-    logout();
+    await logout();
     if (pathname !== "/") {
       router.push("/");
       setIsLoading(false);

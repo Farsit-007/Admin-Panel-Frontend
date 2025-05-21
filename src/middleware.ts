@@ -1,15 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "./services/AuthServices";
 
-const publicRoutes = ["/"]; // Add other public routes if needed
+const publicRoutes = ["/"];
 
 export const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;
   const userInfo = await getCurrentUser();
 
-  // Check if current route is public
   if (publicRoutes.includes(pathname)) {
-    // Redirect logged-in users from public routes to dashboard
     if (userInfo) {
       return NextResponse.redirect(new URL("/dashboard", request.url));
     }

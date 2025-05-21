@@ -4,3 +4,11 @@ export interface ISkill {
   color: string;
   imageUrl: string;
 }
+
+
+export interface IExperiance {
+  _id: string;
+  designation: string;
+  date: string;
+  description: string;
+}
