@@ -87,7 +87,7 @@ const CreateSkill = () => {
               name="color"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Color Name</FormLabel>
+                  <FormLabel>Color Code</FormLabel>
                   <FormControl>
                     <Input {...field} value={field.value || ""} />
                   </FormControl>
