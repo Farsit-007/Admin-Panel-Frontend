@@ -6,22 +6,17 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { useUser } from "@/context/UserContext";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { logout } from "@/services/AuthServices";
 
 export function NavUser() {
-  const { setIsLoading, setUser } = useUser();
+  const { setUser } = useUser();
   const router = useRouter();
-  const pathname = usePathname();
 
-  const handleLogout = async() => {
+  const handleLogout = async () => {
     setUser(null);
-    setIsLoading(true);
     await logout();
-    if (pathname !== "/") {
-      router.push("/");
-      setIsLoading(false);
-    }
+    router.push("/");
   };
 
   return (
