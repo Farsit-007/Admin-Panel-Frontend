@@ -1,8 +1,8 @@
 
 const page = () => {
     return (
-        <div>
-            <h1>Admin Dashboard</h1>
+        <div className="flex justify-center">
+            <h1 className="text-2xl font-bold">Welcome in Dashboard</h1>
         </div>
     );
 };
